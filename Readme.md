@@ -4,14 +4,13 @@ A simple, self-hosted, private **Personal LLM Hub** running completely offline o
 
 Perfect for local AI chat, coding assistance, document Q&A (RAG), voice interactions, and more — no cloud APIs, no subscriptions.
 
-
 ## Features
 
 - Fully local & private LLM inference with **Ollama**
 - Beautiful ChatGPT-like web UI via **Open WebUI**
 - Voice input (Speech-to-Text) & spoken output (Text-to-Speech)
 - GPU support (NVIDIA via Docker)
-- Reverse proxy with self-signed HTTPS via **Caddy** (for better browser compatibility & voice features)
+- Reverse proxy with self-signed HTTPS via **Caddy** (improves browser compatibility & voice features)
 - Easy model switching (e.g. qwen2.5-coder:7b, gemma3, llama3.2, etc.)
 - Persistent storage for models and chat history
 - One-command startup with Docker Compose
@@ -60,11 +59,15 @@ Perfect for local AI chat, coding assistance, document Q&A (RAG), voice interact
 
 ```
 PersonalLLM-Hub/
-├── docker-compose.prod.yml     # Main compose file (Ollama + Open WebUI + Caddy)
+├── .gitignore
 ├── Caddyfile                   # Self-signed HTTPS reverse proxy config
-├── package.json                # (if you have any Node.js scripts/cli tools)
-└── ... (your future scripts, .env, etc.)
+├── docker-compose.prod.yml     # Main compose file (Ollama + Open WebUI + Caddy)
+├── package-lock.json
+├── package.json                # Node.js dependencies (for any future CLI tools/scripts)
+└── README.md
 ```
+
+(node_modules is ignored via .gitignore and should **not** be committed to Git)
 
 ## Useful Commands
 
@@ -108,7 +111,7 @@ docker exec -it ollama-server ollama pull <model-name>
 
 ## Tips & Next Steps
 
-- **Voice not working?** → Use HTTPS (https://localhost) and allow mic in browser
+- **Voice not working?** → Use HTTPS (https://localhost) and allow mic in browser settings
 - **RAG (chat with documents)** → Upload files in Workspace → Documents
 - **Better TTS** → Configure local TTS (e.g. Piper/Kokoro) or use OpenAI TTS key in settings
 - **Backup** → Copy volumes: `ollama-models` & `open-webui-data`
@@ -125,6 +128,6 @@ Feel free to open issues or PRs if you want to add features like:
 
 MIT License – feel free to use, modify, and share.
 
-Made with ❤️ in Ujjain by [decision](https://github.com/pratikdevelop)
+Made with ❤️ in Indore by [decision](https://github.com/pratikdevelop)
 
 Happy local LLM-ing! 🚀
