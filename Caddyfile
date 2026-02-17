@@ -1,0 +1,23 @@
+{
+    # Optional: Log errors/warnings
+    log {
+        output stderr
+        level WARN
+    }
+}
+
+:443 {
+    tls internal {
+        # Optional: Make cert last longer (default leaf is ~12 hours)
+        # lifetime 30d
+    }
+
+    reverse_proxy open-webui:8080 {
+        # Optional: Forward real client IP (useful for logs in Open WebUI)
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+
+    # Optional: Enable compression for faster loading
+    encode zstd gzip
+}
